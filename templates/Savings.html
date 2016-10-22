@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body %}
+
+<h2>For {{pick_rate_1}} the bill is {{Savings_rate_1}}</h2>
+
+<h2>For {{pick_rate_2}} the bill is {{Savings_rate_2}}</h2>
+
+<h2>The customer will save {{Savings}}%</h2>
+
+{% include '/Users/samyouardini/Desktop/DealEng/load_profile_dynamic_rates_1.html' %}
+
+{% endblock body %}

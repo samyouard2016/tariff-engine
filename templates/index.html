@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+
+ <!---------- Cadre principal d'acceuil ------------>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DealEng</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Welcome to the tarrif engine !</h1>
+  <p>Savings calculator for the Global financial product team</p>
+</div>
+
+<!---------- Advanced Search ------------>
+
+<div class="container">
+  <div class="titre">Advanced Search</div>
+  <form action="{% url 'AdvancedSearch' %}" method="GET" class="form-horizontal" role="form">
+      {% csrf_token %}
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="zipcode">Zip Code:</label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" id="zipcode" name='zipcode' placeholder="94103">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="utility">Utility:</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="utility" name='utility' placeholder="PG&E">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox" name="checkbox_sector" value="Residential"> Residential</label>
+          <label><input type="checkbox" name="checkbox_sector"  value="Commercial">Commercial </label>
+          <label><input type="checkbox" name="checkbox_sector"  value="Industrial">Industrial</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+{% if rate_display_req == True %}
+
+    <h2> Rate comparator </h2>
+<form method="get" action="{% url 'ratestructure' %}">
+    <div class="row">
+        <div class=" col-md-6 ">
+            <h3> rate 1</h3>
+            <div class="form-group">
+               <select class="selectpicker" data-live-search="true" name ="pick_rate_1">
+                {% for rate in rate_list %}
+                    <option data-tokens="{{rate}}">{{rate}}</option>
+                 {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class=" col-md-6 ">
+                <h3> rate 2</h3>
+                <div class="form-group">
+                   <select class="selectpicker" data-live-search="true" name ="pick_rate_2">
+                    {% for rate in rate_list %}
+                        <option data-tokens="{{rate}}">{{rate}}</option>
+                     {% endfor %}
+                    </select>
+                </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <button type="submit" class="btn btn-default" name="button" value="get rate">Generate rate structure</button>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+{% endif %}
+</body>
+
+{% endblock body %}

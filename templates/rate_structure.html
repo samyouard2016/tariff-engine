@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block body %}
+<link rel="stylesheet" href="{% static "css/rate_structure.css" %}"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p>Tariffs for {{pick_rate_1}} in $/kWh </p>
+            <link rel="stylesheet" href="{% static "css/df_price_tier.css" %}"/>
+            {% include 'df_price_1.html' %}
+        </div>
+        <div class="col-md-6">
+            <p>Tiers for {{pick_rate_1}} in $/kWh </p>
+            <link rel="stylesheet" href="{% static "css/df_price_tier.css" %}"/>
+            {% include 'df_tiermax_1.html' %}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Tariffs for {{pick_rate_2}} in kWh</p>
+            <link rel="stylesheet" href="{% static "css/df_price_tier.css" %}"/>
+            {% include 'df_price_2.html' %}
+        </div>
+        <div class="col-md-6">
+            <p>Tiers for {{pick_rate_2}} in kWh </p>
+            <link rel="stylesheet" href="{% static "css/df_price_tier.css" %}"/>
+            {% include 'df_tiermax_2.html' %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <form action="{% url 'Savings' %}">
+        <button type="submit" class="btn btn-default">Get Savings</button>
+    </form>
+</div>
+
+{% endblock body %}
