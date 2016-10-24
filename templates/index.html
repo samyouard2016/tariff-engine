@@ -37,11 +37,12 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="utility">Utility:</label>
-      <div class="col-sm-3">
-        <input type="text" class="form-control" id="utility" name='utility' placeholder="PG&E">
-      </div>
-    </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <select class="selectpicker" data-live-search="true" name ="pick_rate_1">
+                {% for rate in rate_list %}
+                    <option data-tokens="{{rate}}">{{rate}}</option>
+                 {% endfor %}
+        </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <div class="checkbox">

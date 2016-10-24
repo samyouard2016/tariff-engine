@@ -2,14 +2,16 @@ from django.shortcuts import render
 import pandas as pd
 import datetime
 import time
-import numpy as np
+from django.http import HttpResponse
 import plotly as plty
-import os
 from django.core.cache import cache
-from django.core.cache import caches
+from .models import utilities_id
 
 def index(request):
-    return render (request,"index.html",{})
+
+    all_utilities = utilities_id.objects.all()
+    context = {"all_utilities": all_utilities}      
+    return render (request,"index.html", context)
 
 def AdvancedSearch (request):
     if request.method == "GET":
@@ -146,6 +148,7 @@ def Savings (request):
                 df_master["Hourly electricity production"], fill_value=0)
             list_temp_period = []
             list_month = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
             for idx, date_time in df_master["Datetime"].iteritems():
                 if date_time.weekday() <= 4:
                     list_col_bool_weekday = [(list_month[date_time.month - 1] in column) & ("weekday" in column) & (
@@ -218,3 +221,18 @@ def Savings (request):
         return render(request, "Savings.html", context)
 
 
+def import_db(request):
+    f_path= '/Users/samyouardini/Desktop/Classeur2.xlsx'
+    f = pd.read_excel(f_path)
+
+    for name in f["name"]:
+        tmp = utilities_id.objects.create()
+        tmp.utility_name = name
+        tmp.save()
+
+    for id in f["id"]:
+        tmp = utilities_id.objects.create()
+        tmp.utility_id = id
+        tmp.save()
+
+    return HttpResponse("Data base updated")
