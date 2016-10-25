@@ -10,7 +10,11 @@ from .models import utilities_id
 def index(request):
 
     all_utilities = utilities_id.objects.all()
+    all_utilities = pd.DataFrame(list(utilities_id.objects.all()))
+    all_utilities = all_utilities["utility_name"]
+    print(all_utilities)
     context = {"all_utilities": all_utilities}      
+
     return render (request,"index.html", context)
 
 def AdvancedSearch (request):
