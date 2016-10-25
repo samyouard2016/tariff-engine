@@ -5,15 +5,16 @@ import time
 from django.http import HttpResponse
 import plotly as plty
 from django.core.cache import cache
-from .models import utilities_id
+from GetRate.models import utilities_id
 
 def index(request):
-
     all_utilities = utilities_id.objects.all()
-    all_utilities = pd.DataFrame(list(utilities_id.objects.all()))
-    all_utilities = all_utilities["utility_name"]
-    print(all_utilities)
-    context = {"all_utilities": all_utilities}      
+    l=[]
+    for utility in all_utilities:
+        if utility.utility_name != "":
+            l.append(utility.utility_name)
+    print(l[101])
+    context = {"l":l}
 
     return render (request,"index.html", context)
 
