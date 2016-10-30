@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from . import views
-from .views import (index, AdvancedSearch, ratestructure, Savings, import_db)
+from .views import (index, AdvancedSearch, ratestructure, Savings, import_db, test)
 from django.views.decorators.cache import cache_page
 
 urlpatterns =[
@@ -10,4 +10,5 @@ urlpatterns =[
     url(r'^ratestructure$', ratestructure , name='ratestructure'),
     url(r'^savings$', Savings , name='Savings'),
     url(r'^importdb$', import_db , name='import_db'),
+    url(r'^test$', test , name='test'),
 ]

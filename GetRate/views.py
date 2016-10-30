@@ -6,16 +6,17 @@ from django.http import HttpResponse
 import plotly as plty
 from django.core.cache import cache
 from GetRate.models import utilities_id
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 
 def index(request):
     all_utilities = utilities_id.objects.all()
-    l=[]
+    l1=[]
     for utility in all_utilities:
         if utility.utility_name != "":
-            l.append(utility.utility_name)
-    print(l[101])
-    context = {"l":l}
-
+            l1.append(utility.utility_name)
+    context = {"l1":l1}
     return render (request,"index.html", context)
 
 def AdvancedSearch (request):
@@ -45,6 +46,7 @@ def AdvancedSearch (request):
     else:
         rate_display_req = False
         context = {"rate_display_req":rate_display_req}
+
     return render (request,"index.html",context)
 
 def ratestructure (request):
@@ -119,6 +121,7 @@ def ratestructure (request):
                        "df_price_2": df_price_2, "df_tiermax_1": df_tiermax_1, "df_tiermax_2": df_tiermax_2,
                        "pick_rate_1": pick_rate_1, "pick_rate_2": pick_rate_2}
 
+    print(context)
     return render(request, "rate_structure.html", context)
 
 def Savings (request):
@@ -127,7 +130,7 @@ def Savings (request):
         list_price = cache.get("list_price")
         list_tiers = cache.get("list_tiers")
         list_schedules = cache.get("list_schedules")
-        print(len(list_tiers))
+
         l = cache.get("l")
         pick_rate_1 = l[0]
         pick_rate_2 = l[1]
@@ -216,11 +219,12 @@ def Savings (request):
             BILLS.append(Total_bill)
             list_master.append(df_master)
 
+
         Savings = format(((BILLS[1]-BILLS[0])/BILLS[0])*100, '.1f')
         Savings_rate_1 = format(BILLS[0], '.1f')
         Savings_rate_2 = format(BILLS[1], '.1f')
-        cache.set("list_master","list_master", 3000)
-        print (BILLS, Savings)
+        cache.set("list_master",list_master, 3000)
+        print(BILLS)
         context = {"BILLS":BILLS , "Savings":Savings, "pick_rate_1":pick_rate_1, "pick_rate_2":pick_rate_2 , "Savings_rate_1":Savings_rate_1 , "Savings_rate_2" :Savings_rate_2 }
 
         return render(request, "Savings.html", context)
@@ -241,3 +245,9 @@ def import_db(request):
         tmp.save()
 
     return HttpResponse("Data base updated")
+
+def test(request):
+    cache.clear()
+    print("hello")
+    return render (request, "dashboard.html", {})
+

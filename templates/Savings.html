@@ -3,12 +3,33 @@
 
 {% block body %}
 
-<h2>For {{pick_rate_1}} the bill is {{Savings_rate_1}}</h2>
+<div class="row ">
+<link rel="stylesheet" type="text/css" href="{% static 'css/Savings.css' %}"/>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title"> {{pick_rate_1}}
+                </h4>
+            </div>
+            <div class="content>">
+                    <p>USD icon: <span class="glyphicon glyphicon-usd"></span>{{Savings_rate_2}}</p>
+                    <p> {{Savings_rate_1}} </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title"> {{pick_rate_2}}
+                </h4>
+            </div>
+            <div class="content>">
+                    <p><span class="glyphicon glyphicon-usd"></span>{{Savings_rate_2}}</p>
+                    <p>{{Savings_rate_2}} </p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>For {{pick_rate_2}} the bill is {{Savings_rate_2}}</h2>
-
-<h2>The customer will save {{Savings}}%</h2>
-
-{% include '/Users/samyouardini/Desktop/DealEng/load_profile_dynamic_rates_1.html' %}
 
 {% endblock body %}
