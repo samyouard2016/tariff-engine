@@ -17,7 +17,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 
 <div class="jumbotron text-center">
@@ -69,6 +68,7 @@
 
 </div>
 
+
 {% if rate_display_req == True %}
 <hr>
 </div class="main_rate_comp" id="inner2">
@@ -96,14 +96,13 @@
                             </select>
                         </div>
                     </div>
+                <div class="row col-sm-offset-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default" name="button" value="get rate">
+                        <span class="glyphicon glyphicon-list"></span>Generate rate structure</button>
+                    </div>
                 </div>
-             </form>
-    </div>
-    <div class="row col-sm-offset-2">
-            <div class="form-group">
-                <button type="submit" class="btn btn-default" name="button" value="get rate">
-                <span class="glyphicon glyphicon-list"></span>Generate rate structure</button>
-            </div>
+            </form>
     </div>
 </div>
 {% else %}
